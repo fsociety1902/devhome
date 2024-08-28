@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:uiControls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:settings="using:DevHome.DevInsights.Properties"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled">
@@ -53,7 +53,7 @@
             </Grid>
         </Grid>
 
-        <controls:DataGrid
+        <uiControls:DataGrid
             x:Uid="ProcessDataGrid"
             x:Name="ProcessDataGrid" Grid.Row="2" Margin="0,4,0,0"
             VerticalScrollBarVisibility="Visible"
@@ -71,11 +71,11 @@
             HeadersVisibility="Column"
             SelectionChanged="{x:Bind ViewModel.ProcessDataGrid_SelectionChanged}"
             ItemsSource="{x:Bind ViewModel.FilteredProcesses, Mode=OneWay}">
-            <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn x:Uid="PidColumn" Binding="{Binding Id}" Width="120"/>
-                <controls:DataGridTextColumn x:Uid="ExecutableColumn" Binding="{Binding ProcessName}" Width="450"/>
-            </controls:DataGrid.Columns>
-        </controls:DataGrid>
+            <uiControls:DataGrid.Columns>
+                <uiControls:DataGridTextColumn x:Uid="PidColumn" Binding="{Binding Id}" Width="120"/>
+                <uiControls:DataGridTextColumn x:Uid="ExecutableColumn" Binding="{Binding ProcessName}" Width="450"/>
+            </uiControls:DataGrid.Columns>
+        </uiControls:DataGrid>
 
     </Grid>
 </Page>
