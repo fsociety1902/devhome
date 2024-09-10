@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 using DevHome.Common.Environments.Models;
 using DevHome.Common.Environments.Services;
 using DevHome.Common.Extensions;
+using DevHome.Common.Helpers;
 using DevHome.Common.Models;
 using DevHome.Common.Services;
 using DevHome.Common.TelemetryEvents;
@@ -63,6 +64,9 @@ public partial class MainPageViewModel : SetupPageViewModelBase, IDisposable
     [ObservableProperty]
     private bool _enableQuickstartPlayground;
 
+    [ObservableProperty]
+    private bool _isMachineConfigurationGPOEnabled;
+
     private bool _disposedValue;
 
     public string MainPageEnvironmentSetupGroupName => StringResource.GetLocalized(StringResourceKey.MainPageEnvironmentSetupGroup);
@@ -105,6 +109,17 @@ public partial class MainPageViewModel : SetupPageViewModelBase, IDisposable
 
         // Hack around this by setting the property explicitly based on the state of the feature.
         EnableQuickstartPlayground = _host.GetService<IExperimentationService>().ExperimentalFeatures.FirstOrDefault(f => string.Equals(f.Id, QuickstartPlaygroundFlowFeatureName, StringComparison.Ordinal))!.IsEnabled;
+
+        var gpoHelper = new GPOHelper();
+        IsMachineConfigurationGPOEnabled = gpoHelper.GetConfiguredEnabledMachineConfigurationValue();
+        if (!IsMachineConfigurationGPOEnabled)
+        {
+            var infoBarService = _host.GetService<IInfoBarService>();
+            infoBarService.ShowAppLevelInfoBar(
+                Microsoft.UI.Xaml.Controls.InfoBarSeverity.Warning,
+                "Contact your sys admin",
+                "subtitle");
+        }
     }
 
     // Create a PropertyChanged handler that we will add to the ExperimentalFeaturesViewModel

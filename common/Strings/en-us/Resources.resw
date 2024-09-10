@@ -359,4 +359,7 @@
     <value>Provides services and environments for running native user-mode Linux shells and tools on Windows.</value>
     <comment>Description for the Containers-Microsoft-Windows-Subsystem-Linux optional feature.</comment>
   </data>
+  <data name="DevHomeFeatureIsBlocked" xml:space="preserve">
+    <value>Disabled by policy, contact your system administrator for support.</value>
+  </data>
 </root>

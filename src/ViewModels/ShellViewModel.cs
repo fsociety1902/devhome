@@ -35,6 +35,9 @@ public partial class ShellViewModel : ObservableObject
     [ObservableProperty]
     private InfoBarModel _shellInfoBarModel = new();
 
+    [ObservableProperty]
+    private bool _isDevHomeGPOEnabled;
+
     public ShellViewModel(
         INavigationService navigationService,
         INavigationViewService navigationViewService,
@@ -58,6 +61,9 @@ public partial class ShellViewModel : ObservableObject
         var activationKind = AppInstance.GetCurrent().GetActivatedEventArgs().Kind;
         Log.Information($"Activated with kind {activationKind}");
         TelemetryFactory.Get<ITelemetry>().Log("DevHome_Shell_Loaded_Event", LogLevel.Critical, new DevHomeShellLoadedEvent(activationKind));
+
+        var gpoHelper = new GPOHelper();
+        IsDevHomeGPOEnabled = gpoHelper.GetConfiguredEnabledDevHomeValue();
 
         switch (activationKind)
         {

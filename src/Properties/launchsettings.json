@@ -3,7 +3,7 @@
     "DevHome (Package)": {
       "commandName": "MsixPackage",
       "doNotLaunchApp": false,
-      "nativeDebugging": false
+      "nativeDebugging": true
     },
     "DevHome (Unpackaged)": {
       "commandName": "Project"
